@@ -12,6 +12,10 @@
             overflow: hidden;
             height: 100%;
         }
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
         canvas {
             position: fixed;
             top: 0;
@@ -52,12 +56,12 @@
             animation: fadeInDown 0.5s ease forwards 0.2s;
         }
         nav ul li a {
-            color: rgba(255, 255, 255, 0.9);
+            color: #ffd700;
             text-decoration: none;
             transition: color 0.3s ease;
         }
         nav ul li a:hover {
-            color: white;
+            color: #fff700;
         }
         main {
             position: relative;
@@ -69,6 +73,7 @@
         h2 {
             font-size: 3rem;
             margin-bottom: 1rem;
+            color: #ffd700;
         }
         p {
             font-size: 1.25rem;
@@ -108,6 +113,26 @@
             cursor: pointer;
         }
 
+        .section {
+            margin: 2rem 0;
+            padding: 2rem;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h3 {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section p {
+            color: #b0b0b0;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
         @media (max-width: 768px) {
             .menu-toggle {
                 display: block;
@@ -119,7 +144,7 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background-color: rgba(0, 0, 0, 0.8);
+                background-color: #1e1e1e;
                 flex-direction: column;
                 padding: 1rem 0;
             }
@@ -159,7 +184,58 @@
     <main>
         <div class="content">
             <h2>Welcome to W3Dhamma!</h2>
-            <p>W3Dhamma offers comprehensive tutorials and resources on key Buddhist texts, including the Abhidhamma, Suttas, Vinaya, and other Dhamma books. Explore in-depth teachings, interactive study guides, and a supportive community to deepen your understanding of Buddhist philosophy, meditation, and practice. Ideal for learners at all levels. </div>
+            <p>W3Dhamma offers comprehensive tutorials and resources on key Buddhist texts, including the Abhidhamma, Suttas, Vinaya, and other Dhamma books. Explore in-depth teachings, interactive study guides, and a supportive community to deepen your understanding of Buddhist philosophy, meditation, and practice. Ideal for learners at all levels.</p>
+        </div>
+
+        <div class="section">
+            <h3>Abhidhamma Studies</h3>
+            <p>Dive deep into the philosophical and psychological aspects of Buddhism with our Abhidhamma courses. Explore the nature of consciousness, mental factors, and the process of cognition.</p>
+        </div>
+
+        <div class="section">
+            <h3>Sutta Central</h3>
+            <p>Access a vast collection of Buddhist suttas from various traditions. Our guided study programs help you navigate through these ancient texts and apply their wisdom to modern life.</p>
+        </div>
+
+        <div class="section">
+            <h3>Vinaya Practice</h3>
+            <p>Understand the monastic code of discipline and its relevance for lay practitioners. Learn how ethical guidelines can enhance your spiritual practice and daily life.</p>
+        </div>
+
+        <div class="section">
+            <h3>Meditation Techniques</h3>
+            <p>Explore various Buddhist meditation techniques, from mindfulness and loving-kindness to analytical and insight meditation. Guided sessions and tips for establishing a regular practice.</p>
+        </div>
+
+        <div class="section">
+            <h3>Buddhist Philosophy</h3>
+            <p>Delve into the core philosophical concepts of Buddhism, including the Four Noble Truths, Dependent Origination, and the nature of reality. Engage in thought-provoking discussions and debates.</p>
+        </div>
+
+        <div class="section">
+            <h3>Dhamma in Daily Life</h3>
+            <p>Discover how to integrate Buddhist teachings into your everyday experiences. Learn practical applications of mindfulness, compassion, and wisdom in work, relationships, and personal growth.</p>
+        </div>
+
+        <div class="section">
+            <h3>Buddhist Ethics</h3>
+            <p>Explore the ethical foundations of Buddhism, including the Five Precepts and the Noble Eightfold Path. Understand how these principles can guide decision-making and promote harmony.</p>
+        </div>
+
+        <div class="section">
+            <h3>Comparative Buddhism</h3>
+            <p>Study the various schools and traditions of Buddhism, including Theravada, Mahayana, and Vajrayana. Understand their unique perspectives and practices.</p>
+        </div>
+
+        <div class="section">
+            <h3>Buddhist Art and Symbolism</h3>
+            <p>Explore the rich world of Buddhist art, architecture, and symbolism. Learn how these visual elements express deep spiritual concepts and support practice.</p>
+        </div>
+
+        <div class="section">
+            <h3>Community and Practice</h3>
+            <p>Connect with fellow practitioners, join study groups, and participate in online events. Share your experiences and support each other on the path of Dhamma.</p>
+        </div>
     </main>
 
     <script>
@@ -187,7 +263,7 @@
 
         let frame = 0;
         function animate() {
-            ctx.fillStyle = '#000B1F';
+            ctx.fillStyle = '#121212';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             stars.forEach(star => {
