@@ -285,15 +285,16 @@
 
         .search-container {
             position: relative;
-            width: 70%;
+            width: 80%;
             max-width: 600px;
         }
 
         #search {
             width: 100%;
+            margin-top:-50px;
             padding: 0.5rem 1rem;
             border-radius: 20px;
-            border: 1px solid var(--text-color);
+            border: 0px;
             background-color: var(--bg-color);
             color: var(--text-color);
             font-size: 1.2rem;
@@ -310,7 +311,7 @@
 
         .search-close {
             position: absolute;
-            top: 50%;
+            top: -30px;
             right: 1rem;
             transform: translateY(-50%);
         }
@@ -623,7 +624,7 @@
     <div class="search-overlay">
         <div id="search-particles-js"></div>
         <div class="search-container">
-            <input type="text" id="search" placeholder="Search...">
+            <input type="search" id="search" placeholder="Search...">
             <button class="search-close" aria-label="Close search"><i class="fas fa-times"></i></button>
         </div>
         <div class="search-loader">
