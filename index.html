@@ -55,7 +55,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 999999991;
             pointer-events: none;
         }
 
@@ -65,10 +65,17 @@
             align-items: center;
             padding: 1rem 2rem;
             background-color: var(--nav-bg);
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1001;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        nav.hidden {
+            transform: translateY(-100%);
         }
 
         .logo {
@@ -80,7 +87,7 @@
         }
 
         .logo:hover {
-            color:;
+            color: var(--secondary-color);
         }
 
         .nav-links {
@@ -115,6 +122,158 @@
             width: 100%;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--text-color);
+            font-size: 1.2rem;
+        }
+
+        .search-toggle:hover {
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .search-toggle:active {
+            box-shadow: 0 0 15px var(--secondary-color);
+        }
+
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            z-index: 1002;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .search-overlay.active {
+            display: flex;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #search {
+            width: 80%;
+            max-width: 600px;
+            padding: 0.5rem 1rem;
+            font-size: 1.2rem;
+            border: none;
+            border-bottom: 2px solid var(--primary-color);
+            background-color: transparent;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+        }
+
+        #search:focus {
+            outline: none;
+        }
+
+        .search-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .search-results {
+            width: 80%;
+            max-width: 600px;
+            max-height: calc(100% - 150px);
+            overflow-y: auto;
+        }
+
+        .search-result {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--card-shadow);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .search-result.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .search-result h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .search-result p {
+            margin-bottom: 1rem;
+        }
+
+        .learn-more {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .learn-more:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .dark-mode-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--text-color);
+            font-size: 1.2rem;
+        }
+
+        .dark-mode-toggle:hover {
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .dark-mode-toggle:active {
+            box-shadow: 0 0 15px var(--secondary-color);
+        }
+
         .menu-toggle {
             display: none;
             background: none;
@@ -130,7 +289,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             background-color: var(--bg-color);
-            color: var(---text-color);
+            color: var(--text-color);
             border: 1px solid var(--text-color);
             font-size: 1.2rem;
         }
@@ -138,6 +297,7 @@
         .menu-toggle:hover {
             color: var(--primary-color);
         }
+
         .mobile-nav {
             display: none;
             position: fixed;
@@ -149,14 +309,20 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            background-color: var(--bg-color);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
         .mobile-nav.active {
             display: flex;
+            opacity: 1;
+            visibility: visible;
         }
 
         .mobile-nav a {
-            color: #ffffff;
+            color: var(--text-color);
             font-size: 1.5rem;
             margin: 1rem 0;
             text-decoration: none;
@@ -167,58 +333,15 @@
             top: 20px;
             right: 20px;
             font-size: 2rem;
-            color: #ffffff;
+            color: var(--text-color);
             cursor: pointer;
-        }
-
-        .main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .search-toggle, .dark-mode-toggle {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background-color: var(--bg-color);
-            color: var(---text-color);
-            border: 1px solid var(--text-color);
-            font-size: 1.2rem;
-        }
-
-        .logo:hover, .search-toggle:hover, .dark-mode-toggle:hover, .menu-toggle:hover {
-            box-shadow: 0 0 10px var(--primary-color);
-        }
-
-        .menu-toggle:hover, .search-toggle:active, .dark-mode-toggle:active {
-            box-shadow: 0 0 15px var(--secondary-color);
-        }
-
-@media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-            .nav-links {
-                display: none;
-            }
         }
 
         main {
             max-width: 100%;
-            margin: 2rem auto;
+            margin: 5rem auto 2rem;
             padding: 0 2rem;
+            transition: opacity 0.3s ease;
         }
 
         section {
@@ -263,77 +386,71 @@
             padding: 1.5rem;
             box-shadow: var(--card-shadow);
             transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .search-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
             height: 100%;
-            z-index: 1002;
-            display: none;
+            display: flex;
             flex-direction: column;
-            align-items: center;
-            padding-top: 4rem;
         }
 
-        .search-container {
-            position: relative;
-            width: 80%;
-            max-width: 600px;
+        .card h2 {
+            margin-bottom: 1rem;
         }
 
-        #search {
-            width: 100%;
-            margin-top:-120px;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            border: 0px;
-            background-color: var(--bg-color);
+        .card p {
+            flex-grow: 1;
+        }
+
+        footer {
+            background-color: var(--nav-bg);
             color: var(--text-color);
-            font-size: 1.2rem;
+            padding: 2rem;
+            margin-top: 4rem;
+            transition: opacity 0.3s ease;
         }
 
-        .search-close {
-            background: none;
-            border: none;
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section {
+            margin-right: 0;
+            border: 1px solid var(--primary-color);
+            text-align: left;
+            padding: 10px;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size:;
+        }
+
+        .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
             color: var(--text-color);
-            font-size: 1.2rem;
-            cursor: pointer;
+            text-decoration: none;
             transition: color 0.3s;
+            font-size:;
         }
 
-        .search-close {
-            position: absolute;
-            top: -30px;
-            right: 1rem;
-            transform: translateY(-50%);
+        .footer-section ul li a:hover {
+            color: var(--primary-color);
         }
 
-        .search-results {
-            margin-top: 2rem;
-            width: 70%;
-            max-width: 600px;
-            height: calc(100% - 100px);
-            overflow-y: auto;
-        }
-
-        mark {
-            background-color: #052F2E;
-            color: #3BCEBC;
-        }
-
-        .search-loader {
-            display: none;
-            justify-content: center;
-            align-items: center;
-            height: 100px;
+        .content-hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
         .loader {
@@ -343,6 +460,7 @@
             width: 40px;
             height: 40px;
             animation: spin 1s linear infinite;
+            margin: 20px auto;
         }
 
 @keyframes spin {
@@ -354,221 +472,52 @@
             }
         }
 
-        .dark-mode-toggle i {
-            font-size: 1.2rem;
-            color: var(--text-color);
-        }
-
-@keyframes cometMove {
-            0% {
-                transform: translate(-100%, -100%);
-            }
-            100% {
-                transform: translate(100%, 100%);
-            }
-        }
-
-@keyframes starBlink {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.3;
-            }
-        }
-
-        .comet {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.7), transparent);
-            animation: cometMove 10s linear infinite;
-        }
-
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background-color: white;
-            animation: starBlink 3s ease-in-out infinite;
-        }
-
-@keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        footer {
-            background-color: var(--nav-bg);
-            color: var(--text-color);
-            padding: 2rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .footer-section {
-            flex: 1;
-            margin-right: 2rem;
-            margin-bottom: 1rem;
-            border: 1px solid var(--primary-color);
-            text-align: ;
-            padding: 10px;
-        }
-
-        .footer-section h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-        }
-
-        .footer-section ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-section ul li a {
-            color: var(--text-color);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: clamp(0.9rem, 2.5vw, 1rem);
-        }
-
-        .footer-section ul li a:hover {
-            color: var(--primary-color);
-        }
-
-        .page-content {
-            transition: opacity 0.3s ease;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .mobile-nav {
-            padding: 2rem;
-        }
-
-        .mobile-nav a {
+        .load-more {
             display: block;
-            font-size: 1.5rem;
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--text-color);
-        }
-
-        .mobile-nav a:last-child {
-            border-bottom: none;
-        }
-
-        .close-menu {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 2rem;
-            background: none;
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-align: center;
             border: none;
-            color: var(--text-color);
+            border-radius: 4px;
             cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
         }
 
-        p {
-            font-size: 0.95rem;
-        }
-        .footer-section {
-            flex-basis: 100%;
-            margin-right: 0;
+        .load-more:hover {
+            background-color: var(--secondary-color);
         }
 
-        footer {
-            background-color: var(--nav-bg);
-            color: var(--text-color);
-            padding: 2rem;
-            margin-top: 4rem;
-
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .footer-section {
-            flex: 1;
-            margin-right: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .footer-section h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .footer-section ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-section ul li a {
-            color: var(--text-color);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-section ul li a:hover {
-            color: var(--primary-color);
-        }
 @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            .nav-links {
+                display: none;
+            }
             nav {
                 padding: 1rem;
             }
-
             .logo {
                 font-size: 1.5rem;
             }
-
             h1 {
                 font-size: 2rem;
             }
-
             h2 {
                 font-size: 1.5rem;
             }
-
             p {
                 font-size: 0.95rem;
             }
-
             .footer-section {
                 flex-basis: 100%;
                 margin-right: 0;
+            }
+            .font {
+                font-size: px;
             }
         }
 
@@ -576,31 +525,195 @@
             main {
                 padding: 0 1rem;
             }
-
             h1 {
                 font-size: 1.8rem;
             }
-
             h2 {
                 font-size: 1.3rem;
             }
-
             p {
                 font-size: 0.9rem;
             }
+            .font {
+                font-size: rem;
+            }
         }
 
-        .space {
-            padding: 0.5rem
+@media (min-width: 1024px) {
+            nav {
+                padding: 1rem 4rem;
+            }
+
+            .nav-links {
+                justify-content: flex-end;
+            }
+
+            .nav-links a {
+                margin-left: 2rem;
+            }
+
+            .nav-right {
+                margin-left: 2rem;
+            }
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .font {
+                font-size: rem;
+            }
         }
 
-        /* New styles for text selection */
+
         ::selection {
             background-color: #052F2E;
             color: #3BCEBC;
         }
-    </style>
 
+        /* New styles for animations */
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+        }
+
+        .fade-in {
+            opacity: 1;
+            transition: opacity 0.3s ease-in;
+        }
+
+        .slide-out {
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-out;
+        }
+
+        .slide-in {
+            transform: translateY(0);
+            transition: transform 0.3s ease-in;
+        }
+
+        /* Custom search animation */
+@keyframes searchPulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .search-toggle.searching {
+            animation: searchPulse 1s infinite;
+        }
+
+        .form-container {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+@keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, textarea {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background-color: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 5px;
+            font-size: 1rem;
+            color: var(--text-color);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--input-focus);
+            box-shadow: 0 0 0 2px rgba(74, 74, 74, 0.5);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+
+        button:hover {
+            background-color: var(--button-hover);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 5px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .success-message {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--success-color);
+        }
+
+        .error-message {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: var(--error-color);
+        }
+
+        .show-message {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+@media (max-width: 480px) {
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            input, textarea, button {
+                font-size: 0.9rem;
+            }
+        }
+
+    </style>
 </head>
 <body>
     <div id="particles-js"></div>
@@ -613,7 +726,6 @@
             <a href="#vinaya">Vinaya</a>
             <a href="#changelog">Changelog</a>
         </div>
-        <div class="space"></div>
         <div class="nav-right">
             <button class="search-toggle" aria-label="Toggle search"><i class="fas fa-search"></i></button>
             <button class="dark-mode-toggle" aria-label="Toggle dark mode"><i class="fas fa-sun"></i></button>
@@ -622,19 +734,15 @@
     </nav>
 
     <div class="search-overlay">
-        <div id="search-particles-js"></div>
-        <div class="search-container">
-            <input type="search" id="search" placeholder="Search...">
-            <button class="search-close" aria-label="Close search"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="search-loader">
-            <div class="loader"></div>
-        </div>
+        <button class="search-close" aria-label="Close search"><i class="fas fa-times"></i></button>
+        <input type="search" id="search" placeholder="Search...">
+        <div id="search-message"></div>
         <div class="search-results"></div>
+        <button class="load-more" style="display: none;">Load More</button>
     </div>
 
     <div class="mobile-nav">
-        <button class="close-menu" aria-label="Close menu"><i class="fas fa-times"></i></button>
+        <button class="mobile-nav-close" aria-label="Close menu"><i class="fas fa-times"></i></button>
         <a href="#home">Home</a>
         <a href="#abhidhamma">Abhidhamma</a>
         <a href="#sutta">Sutta</a>
@@ -642,69 +750,525 @@
         <a href="#changelog">Changelog</a>
     </div>
 
-    <div class="page-content">
-        <main>
-            <section id="home" class="fade-in">
-                <h1>Welcome to W3Dhamma</h1>
-                <p>
-                    W3Dhamma is your gateway to the profound teachings of Buddhism, including Abhidhamma, Sutta, and Vinaya. Our mission is to make these ancient wisdom traditions accessible to all in the digital age.
+    <main>
+        <section id="home" class="fade-in">
+            <h1 class="font">Welcome to W3Dhamma</h1>
+            <p class="font">
+                W3Dhamma is your gateway to the profound teachings of Buddhism, including Abhidhamma, Sutta, and Vinaya. Our mission is to make these ancient wisdom traditions accessible to all in the digital age.
+            </p>
+            <div class="card-container">
+                <div class="card">
+                    <h2>Abhidhamma</h2>
+                    <p>
+                        Dive deep into the philosophical and psychological aspects of Buddhism.
+                    </p>
+                </div>
+                <div class="card">
+                    <h2>Sutta</h2>
+                    <p>
+                        Explore the discourses of the Buddha, containing core teachings and practices.
+                    </p>
+                </div>
+                <div class="card">
+                    <h2>Vinaya</h2>
+                    <p>
+                        Learn about the monastic code of conduct and its relevance to lay practitioners.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="abhidhamma">
+            <h1>Abhidhamma</h1>
+            <div class="card-container">
+                <div class="card">
+                    <h2>Introduction to Abhidhamma</h2>
+                    <p>
+                        Abhidhamma, meaning 'higher doctrine', is the third basket of the Tipitaka, the canonical scriptures of Buddhism. It offers a detailed psychological and philosophical analysis of the nature of reality.
+                    </p>
+                </div>
+                <div class="card">
+                    <h2>The Seven Books of Abhidhamma</h2>
+                    <p>
+                        The Abhidhamma Pitaka consists of seven books: Dhammasangani, Vibhanga, Dhatukatha, Puggalapannatti, Kathavatthu, Yamaka, and Patthana. Each book explores different aspects of the Dhamma in great detail.
+                    </p>
+                </div>
+                <div class="card">
+                    <h2>Key Concepts in Abhidhamma</h2>
+                    <p>
+                        Some key concepts in Abhidhamma include the analysis of consciousness (citta), mental factors (cetasika), matter (rupa), and Nibbana. It also explores the concept of dependent origination (paticca samuppada) in great depth.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sutta">
+            <h1>Sutta</h1>
+            <div class="card-container">
+                <div class="card">
+                    <h2>Introduction to Sutta</h2>
+                    <p>
+                        The Sutta Pitaka contains the discourses of the Buddha and his chief disciples, forming the doctrinal foundation of Theravada Buddhism. These teachings cover a wide range of topics, from practical advice for daily life to profound philosophical insights.
+                    </p>
+                </div>
+                <div class="card">
+                    <h2>Major Collections</h2>
+                    <p>
+                        The Sutta Pitaka is divided into five nikayas (collections): Digha Nikaya, Majjhima Nikaya, Samyutta Nikaya, Anguttara Nikaya, and Khuddaka Nikaya. Each collection contains suttas grouped by various criteria such as length or subject matter.
+                    </p>
+                </div>
+                <div class="card">
+                    <h2>Key Suttas</h2>
+                    <p>
+                        Some of the most famous suttas include the Dhammacakkappavattana Sutta (Setting the Wheel of Dhamma in Motion), the Maha-satipatthana Sutta (The Great Discourse on the Foundations of Mindfulness), and the Metta Sutta (Discourse on Loving-Kindness).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="vinaya">
+            <h1>Vinaya</h1>
+            <div class="card-container">
+                <div class="card">
+                    <h2>Introduction to Vinaya</h2>
+                    <p>
+                        The Vinaya Pitaka is the division of the Tripitaka that contains the rules and procedures that govern the Buddhist monastic community, or sangha. It not only defines rules for monks and nuns but also provides solutions for all kinds of situations and includes stories of the Buddha and his disciples.
+                    </p>
+                </div>
+                <div class="card">
+                    <h2>Structure of the Vinaya</h2>
+                    <p>
+                        The Vinaya Pitaka is divided into three parts: the Suttavibhanga, the Khandhaka, and the Parivara. The Suttavibhanga contains the patimokkha rules for monks and nuns, along with their origin stories. The Khandhaka deals with other aspects of monastic life, while the Parivara serves as a summary and study guide.
+                    </p>
+                </div>
+                <div class="card">
+                    <h2>Relevance for Lay Practitioners</h2>
+                    <p>
+                        While the Vinaya primarily concerns monastic discipline, many of its ethical principles and guidelines for harmonious community living are valuable for lay practitioners as well. Understanding the Vinaya can deepen one's appreciation of the monastic tradition and inspire a more disciplined approach to spiritual practice.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="changelog">
+            <h1>Changelog</h1>
+            <div class="card-container">
+                <div class="card">
+                    <h2>Version 1.0.0 (2023-06-01)</h2>
+                    <ul>
+                        <li>Initial launch of W3Dhamma</li>
+                        <li>Added sections for Abhidhamma, Sutta, and Vinaya</li>
+                        <li>Implemented responsive design for mobile and desktop</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h2>Version 1.1.0 (2023-06-15)</h2>
+                    <ul>
+                        <li>Added space-themed animated background</li>
+                        <li>Implemented light/dark mode toggle</li>
+                        <li>Added search functionality across all sections</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h2>Version 1.2.0 (2023-07-01)</h2>
+                    <ul>
+                        <li>Improved accessibility features</li>
+                        <li>Added more content to Abhidhamma and Sutta sections</li>
+                        <li>Optimized performance for faster loading times</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div class="form-container">
+        <h2>Contact Us</h2>
+        <form id="contactForm" action="https://formspree.io/f/xanyweyr" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <div id="successMessage" class="message success-message">
+            Thank you! We'll contact you soon.
+        </div>
+        <div id="errorMessage" class="message error-message">
+            Oops! There was a problem sending your message. Please try again.
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <br>
+                <h3 class="h3 font">About W3Dhamma</h3>
+                <p class="p font">
+                    W3Dhamma is a modern platform dedicated to making Buddhist teachings accessible in the digital age. We offer comprehensive resources on Abhidhamma, Sutta, and Vinaya, aiming to bridge ancient wisdom with contemporary understanding.
                 </p>
-                <div class="card-container">
-                    <div class="card">
-                        <h2>Abhidhamma</h2>
-                        <p>
-                            Dive deep into the philosophical and psychological aspects of Buddhism.
-                        </p>
-                    </div>
-                    <div class="card">
-                        <h2>Sutta</h2>
-                        <p>
-                            Explore the discourses of the Buddha, containing core teachings and practices.
-                        </p>
-                    </div>
-                    <div class="card">
-                        <h2>Vinaya</h2>
-                        <p>
-                            Learn about the monastic code of conduct and its relevance to lay practitioners.
-                        </p>
-                    </div>
-                </div>
-            </section>
+            </div>
+            <div class="footer-section">
+                <br>
+                <h3 class="h3 font">Quick Links</h3>
+                <ul class="ul font">
+                    <style>
+                        .font {
+                            font-size: px;
+                        }
+                    </style>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#abhidhamma">Abhidhamma</a></li>
+                    <li><a href="#sutta">Sutta</a></li>
+                    <li><a href="#vinaya">Vinaya</a></li>
+                    <li><a href="#changelog">Changelog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section font">
+                <br>
+                <h3 class="font">Connect</h3>
+                <ul class="font">
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="far fa-envelope"></i> Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 
-            <section id="abhidhamma">
-                <h1>Abhidhamma</h1>
-                <div class="card-container">
-                    <div class="card">
-                        <h2>Introduction to Abhidhamma</h2>
-                        <p>
-                            Abhidhamma, meaning 'higher doctrine', is the third basket of the Tipitaka, the canonical scriptures of Buddhism. It offers a detailed psychological and philosophical analysis of the nature of reality.
-                        </p>
-                    </div>
-                    <div class="card">
-                        <h2>The Seven Books of Abhidhamma</h2>
-                        <p>
-                            The Abhidhamma Pitaka consists of seven books: Dhammasangani, Vibhanga, Dhatukatha, Puggalapannatti, Kathavatthu, Yamaka, and Patthana. Each book explores different aspects of the Dhamma in great detail.
-                        </p>
-                    </div>
-                    <div class="card">
-                        <h2>Key Concepts in Abhidhamma</h2>
-                        <p>
-                            Some key concepts in Abhidhamma include the analysis of consciousness (citta), mental factors (cetasika), matter (rupa), and Nibbana. It also explores the concept of dependent origination (paticca samuppada) in great depth.
-                        </p>
-                    </div>
-                </div>
-            </section>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        const particlesConfig = {
+            particles: {
+                number: {
+                    value: 100,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: ["#FF0000",
+                        "#00FF00",
+                        "#0000FF",
+                        "#FFFF00",
+                        "#FF00FF",
+                        "#00FFFF",
+                        "#FFA500",
+                        "#800080",
+                        "#008000",
+                        "#FFC0CB"]
+                },
+                shape: {
+                    type: "circle"
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: false
+                },
+                move: {
+                    enable: true,
+                    speed: 0.5,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "bubble"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    bubble: {
+                        distance: 200,
+                        size: 6,
+                        duration: 2,
+                        opacity: 0.8,
+                        speed: 3
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        };
 
-            <section id="sutta">
-                <h1>Sutta</h1>
-                <div class="card-container">
-                    <div class="card">
-                        <h2>Introduction to Sutta</h2>
-                        <p>
-                            The Sutta Pitaka contains the discourses of the Buddha and his chief disciples, forming the doctrinal foundation of Theravada Buddhism. These teachings cover a wide range of topics, from practical advice for daily life to profound philosophical insights.
-                        </p>
-                    </div>
-                    <div class="card">
-                        <h2>Major Collections</h2>
-                        <p>
-                            The Sut
+        particlesJS('particles-js', particlesConfig);
+
+        // Dark mode toggle
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        const body = document.body;
+
+        body.classList.add('dark-mode');
+        updateDarkModeIcon();
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            updateDarkModeIcon();
+        });
+
+        function updateDarkModeIcon() {
+            const isDarkMode = body.classList.contains('dark-mode');
+            darkModeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>': '<i class="fas fa-moon"></i>';
+        }
+
+        // Navigation and content visibility
+        const nav = document.querySelector('nav');
+        const pageContent = document.querySelector('main');
+        const footer = document.querySelector('footer');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileNavClose = document.querySelector('.mobile-nav-close');
+        const searchToggle = document.querySelector('.search-toggle');
+        const searchOverlay = document.querySelector('.search-overlay');
+        const searchClose = document.querySelector('.search-close');
+        const searchInput = document.getElementById('search');
+        const searchResults = document.querySelector('.search-results');
+        const searchMessage = document.getElementById('search-message');
+        const loadMoreButton = document.querySelector('.load-more');
+        const sections = document.querySelectorAll('section');
+
+        function hideContent() {
+            nav.classList.add('slide-out');
+            pageContent.classList.add('fade-out');
+            footer.classList.add('fade-out');
+            setTimeout(() => {
+                nav.style.display = 'none';
+                pageContent.style.display = 'noe';
+                footer.style.display = 'noe';
+            }, );
+        }
+
+        function showContent() {
+            nav.style.display = '';
+            pageContent.style.display = '';
+            footer.style.display = '';
+            setTimeout(() => {
+                nav.classList.remove('slide-out');
+                pageContent.classList.remove('fade-out');
+                footer.classList.remove('fade-out');
+            }, 50);
+        }
+
+        menuToggle.addEventListener('click', () => {
+            hideContent();
+            setTimeout(() => {
+                mobileNav.classList.add('active');
+            }, 300);
+        });
+
+        mobileNavClose.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            setTimeout(showContent, 300);
+        });
+
+        searchToggle.addEventListener('click', () => {
+            hideContent();
+            setTimeout(() => {
+                searchOverlay.classList.add('active');
+                searchInput.focus();
+            }, 300);
+        });
+
+        searchClose.addEventListener('click', () => {
+            searchOverlay.classList.remove('active');
+            setTimeout(() => {
+                showContent();
+                searchInput.value = '';
+                searchResults.innerHTML = '';
+                searchMessage.textContent = '';
+                loadMoreButton.style.display = 'none';
+            }, 300);
+        });
+
+        // Search functionality
+        let allResults = [];
+        let currentPage = 1;
+        const resultsPerPage = 10;
+
+        searchInput.addEventListener('input', () => {
+            clearTimeout(searchInput.searchTimeout);
+            searchToggle.classList.add('searching');
+            searchInput.searchTimeout = setTimeout(() => {
+                performSearch();
+                searchToggle.classList.remove('searching');
+            }, 500);
+        });
+
+        function performSearch() {
+            const searchTerm = searchInput.value.toLowerCase();
+            searchResults.innerHTML = '';
+            searchMessage.textContent = 'Searching...';
+            loadMoreButton.style.display = 'none';
+
+            if (searchTerm.trim() === '') {
+                searchMessage.textContent = '';
+                return;
+            }
+
+            setTimeout(() => {
+                allResults = [];
+                sections.forEach(section => {
+                    const text = section.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        const title = section.querySelector('h1, h2').textContent;
+                        const snippet = text.substring(text.indexOf(searchTerm) - 50, text.indexOf(searchTerm) + 50);
+                        allResults.push({
+                            title: title,
+                            snippet: snippet,
+                            id: section.id
+                        });
+                    }
+                });
+
+                if (allResults.length === 0) {
+                    searchMessage.textContent = 'No results found.';
+                } else {
+                    searchMessage.textContent = `${allResults.length} results found.`;
+                    currentPage = 1;
+                    displayResults();
+                }
+            },
+                3000);
+        }
+
+        function displayResults() {
+            const startIndex = (currentPage - 1) * resultsPerPage;
+            const endIndex = startIndex + resultsPerPage;
+            const pageResults = allResults.slice(startIndex,
+                endIndex);
+
+            pageResults.forEach((result, index) => {
+                const resultElement = document.createElement('div');
+                resultElement.className = 'search-result';
+                resultElement.innerHTML = `
+                <h3>${result.title}</h3>
+                <p>${highlightText(result.snippet, searchInput.value)}</p>
+                <a href="#${result.id}" class="learn-more">Learn More</a>
+                `;
+                searchResults.appendChild(resultElement);
+                setTimeout(() => resultElement.classList.add('visible'), 50 * index);
+            });
+
+            loadMoreButton.style.display = endIndex < allResults.length ? 'block': 'none';
+        }
+
+        loadMoreButton.addEventListener('click', () => {
+            currentPage++;
+            loadMoreButton.style.display = 'none';
+            const loader = document.createElement('div');
+            loader.className = 'loader';
+            searchResults.appendChild(loader);
+            setTimeout(() => {
+                searchResults.removeChild(loader);
+                displayResults();
+            }, 1000);
+        });
+
+        function highlightText(text, term) {
+            const regex = new RegExp(`(${term})`,
+                'gi');
+            return text.replace(regex,
+                '<mark>$1</mark>');
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    searchOverlay.classList.remove('active');
+                    mobileNav.classList.remove('active');
+                    showContent();
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in effect
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var form = event.target;
+            var formData = new FormData(form);
+            var submitButton = form.querySelector('button[type="submit"]');
+            var successMessage = document.getElementById('successMessage');
+            var errorMessage = document.getElementById('errorMessage');
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+
+            fetch(form.action,
+                {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        form.reset();
+                        successMessage.classList.add('show-message');
+                        errorMessage.classList.remove('show-message');
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                }).catch(error => {
+                    errorMessage.classList.add('show-message');
+                    successMessage.classList.remove('show-message');
+                }).finally(() => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Send Message';
+                });
+        });
+    </script>
+</body>
+</html>
