@@ -55,7 +55,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 999999991;
+            z-index: 999991;
             pointer-events: none;
         }
 
@@ -198,7 +198,7 @@
 
         .search-close {
             position: absolute;
-            top: 1rem;
+            top: 1.6rem;
             right: 1rem;
             font-size: 1.5rem;
             cursor: pointer;
@@ -240,8 +240,8 @@
         .learn-more {
             display: inline-block;
             padding: 0.5rem 1rem;
-            background-color: var(--primary-color);
-            color: #ffffff;
+            background-color: #052F2E;
+            color: #3BCEBC;
             text-decoration: none;
             border-radius: 4px;
             transition: background-color 0.3s;
@@ -356,8 +356,16 @@
             transform: translateY(0);
         }
 
+        .home-section {
+            border-radius: 8px;
+            padding: 1.5rem;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+
         h1 {
-            font-size: clamp(2rem, 5vw, 2.5rem);
+            font-size: clamp(2rem, 2vw, 2.5rem);
             color: var(--primary-color);
             margin-bottom: 1rem;
         }
@@ -391,7 +399,7 @@
             flex-direction: column;
         }
 
-        .card h2 {
+        .card h2 h1 {
             margin-bottom: 1rem;
         }
 
@@ -416,10 +424,14 @@
         }
 
         .footer-section {
-            margin-right: 0;
-            border: 1px solid var(--primary-color);
-            text-align: left;
-            padding: 10px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .footer-section h3 {
@@ -441,7 +453,6 @@
             color: var(--text-color);
             text-decoration: none;
             transition: color 0.3s;
-            font-size:;
         }
 
         .footer-section ul li a:hover {
@@ -476,8 +487,8 @@
             display: block;
             width: 100%;
             padding: 10px;
-            background-color: var(--primary-color);
-            color: #ffffff;
+            background-color: #052F2E;
+            color: #3BCEBC;
             text-align: center;
             border: none;
             border-radius: 4px;
@@ -512,13 +523,6 @@
             p {
                 font-size: 0.95rem;
             }
-            .footer-section {
-                flex-basis: 100%;
-                margin-right: 0;
-            }
-            .font {
-                font-size: px;
-            }
         }
 
 @media (max-width: 480px) {
@@ -533,9 +537,6 @@
             }
             p {
                 font-size: 0.9rem;
-            }
-            .font {
-                font-size: rem;
             }
         }
 
@@ -555,14 +556,8 @@
             .nav-right {
                 margin-left: 2rem;
             }
-            .footer-content {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .font {
-                font-size: rem;
-            }
-        }
 
+        }
 
         ::selection {
             background-color: #052F2E;
@@ -622,41 +617,43 @@
             }
         }
 
-        h2 {
+        .form-container h2 {
             text-align: center;
             margin-bottom: 1.5rem;
             font-size: 1.8rem;
         }
 
-        form {
+        .form-container form {
             display: flex;
             flex-direction: column;
         }
 
-        input, textarea {
+        .form-container input,
+        .form-container textarea {
             margin-bottom: 1rem;
             padding: 0.75rem;
-            background-color: var(--input-bg);
-            border: 1px solid var(--input-border);
+            background-color: var(--bg-color);
+            border: 1px solid var(--text-color);
             border-radius: 5px;
             font-size: 1rem;
             color: var(--text-color);
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        input:focus, textarea:focus {
+        .form-container input:focus,
+        .form-container textarea:focus {
             outline: none;
-            border-color: var(--input-focus);
-            box-shadow: 0 0 0 2px rgba(74, 74, 74, 0.5);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.5);
         }
 
-        textarea {
+        .form-container textarea {
             min-height: 100px;
             resize: vertical;
         }
 
-        button {
-            background-color: var(--button-bg);
+        .form-container button {
+            background-color: var(--primary-color);
             color: white;
             border: none;
             padding: 0.75rem;
@@ -666,11 +663,11 @@
             transition: background-color 0.3s ease, transform 0.1s ease;
         }
 
-        button:hover {
-            background-color: var(--button-hover);
+        .form-container button:hover {
+            background-color: var(--secondary-color);
         }
 
-        button:active {
+        .form-container button:active {
             transform: scale(0.98);
         }
 
@@ -686,12 +683,12 @@
 
         .success-message {
             background-color: rgba(76, 175, 80, 0.1);
-            color: var(--success-color);
+            color: #4CAF50;
         }
 
         .error-message {
             background-color: rgba(244, 67, 54, 0.1);
-            color: var(--error-color);
+            color: #F44336;
         }
 
         .show-message {
@@ -701,18 +698,31 @@
 
 @media (max-width: 480px) {
             .form-container {
-                padding: 1.5rem;
+                padding: 1rem;
             }
 
-            h2 {
+            .form-container h2 {
                 font-size: 1.5rem;
             }
 
-            input, textarea, button {
+            .form-container input,
+            .form-container textarea,
+            .form-container button {
                 font-size: 0.9rem;
             }
         }
 
+        /* New styles for search animation */
+        .search-animation {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .search-animation.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -736,6 +746,10 @@
     <div class="search-overlay">
         <button class="search-close" aria-label="Close search"><i class="fas fa-times"></i></button>
         <input type="search" id="search" placeholder="Search...">
+        <video class="search-animation" loop muted>
+            <source src="search-animation.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
         <div id="search-message"></div>
         <div class="search-results"></div>
         <button class="load-more" style="display: none;">Load More</button>
@@ -752,10 +766,18 @@
 
     <main>
         <section id="home" class="fade-in">
-            <h1 class="font">Welcome to W3Dhamma</h1>
-            <p class="font">
-                W3Dhamma is your gateway to the profound teachings of Buddhism, including Abhidhamma, Sutta, and Vinaya. Our mission is to make these ancient wisdom traditions accessible to all in the digital age.
-            </p>
+            <div class="home-section">
+                <h3>About W3Dhamma</h3>
+                <p class="font">
+                    W3Dhamma is a modern platform dedicated to making Buddhist teachings accessible in the digital age. We offer comprehensive resources on Abhidhamma, Sutta, and Vinaya, aiming to bridge ancient wisdom with contemporary understanding.
+                </p>
+            </div>
+            <pre>
+
+
+
+
+            </pre>
             <div class="card-container">
                 <div class="card">
                     <h2>Abhidhamma</h2>
@@ -892,28 +914,20 @@
             Thank you! We'll contact you soon.
         </div>
         <div id="errorMessage" class="message error-message">
-            Oops! There was a problem sending your message. Please try again.
+            Oops! Something went wrong. Please try again.
         </div>
     </div>
-
     <footer>
-        <div class="footer-content">
+        <div class="card-container">
             <div class="footer-section">
-                <br>
-                <h3 class="h3 font">About W3Dhamma</h3>
-                <p class="p font">
+                <h3>About W3Dhamma</h3>
+                <p class="font">
                     W3Dhamma is a modern platform dedicated to making Buddhist teachings accessible in the digital age. We offer comprehensive resources on Abhidhamma, Sutta, and Vinaya, aiming to bridge ancient wisdom with contemporary understanding.
                 </p>
             </div>
             <div class="footer-section">
-                <br>
-                <h3 class="h3 font">Quick Links</h3>
-                <ul class="ul font">
-                    <style>
-                        .font {
-                            font-size: px;
-                        }
-                    </style>
+                <h3>Quick Links</h3>
+                <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#abhidhamma">Abhidhamma</a></li>
                     <li><a href="#sutta">Sutta</a></li>
@@ -921,10 +935,9 @@
                     <li><a href="#changelog">Changelog</a></li>
                 </ul>
             </div>
-            <div class="footer-section font">
-                <br>
-                <h3 class="font">Connect</h3>
-                <ul class="font">
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
                     <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
                     <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
                     <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
@@ -932,343 +945,333 @@
                 </ul>
             </div>
         </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script>
-        const particlesConfig = {
-            particles: {
-                number: {
-                    value: 100,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: ["#FF0000",
-                        "#00FF00",
-                        "#0000FF",
-                        "#FFFF00",
-                        "#FF00FF",
-                        "#00FFFF",
-                        "#FFA500",
-                        "#800080",
-                        "#008000",
-                        "#FFC0CB"]
-                },
-                shape: {
-                    type: "circle"
-                },
-                opacity: {
-                    value: 0.5,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 1,
-                        opacity_min: 0.1,
-                        sync: false
-                    }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 2,
-                        size_min: 0.1,
-                        sync: false
-                    }
-                },
-                line_linked: {
-                    enable: false
-                },
-                move: {
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+    const particlesConfig = {
+        particles: {
+            number: {
+                value: 100,
+                density: {
                     enable: true,
-                    speed: 0.5,
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false
+                    value_area: 800
                 }
             },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: "bubble"
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: "push"
-                    },
-                    resize: true
-                },
-                modes: {
-                    bubble: {
-                        distance: 200,
-                        size: 6,
-                        duration: 2,
-                        opacity: 0.8,
-                        speed: 3
-                    },
-                    push: {
-                        particles_nb: 4
-                    }
+            color: {
+                value: ["#FF0000",
+                    "#00FF00",
+                    "#0000FF",
+                    "#FFFF00",
+                    "#FF00FF",
+                    "#00FFFF",
+                    "#FFA500",
+                    "#800080",
+                    "#008000",
+                    "#FFC0CB"]
+            },
+            shape: {
+                type: "circle"
+            },
+            opacity: {
+                value: 0.5,
+                random: true,
+                anim: {
+                    enable: true,
+                    speed: 1,
+                    opacity_min: 0.1,
+                    sync: false
                 }
             },
-            retina_detect: true
-        };
-
-        particlesJS('particles-js', particlesConfig);
-
-        // Dark mode toggle
-        const darkModeToggle = document.querySelector('.dark-mode-toggle');
-        const body = document.body;
-
-        body.classList.add('dark-mode');
-        updateDarkModeIcon();
-
-        darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            updateDarkModeIcon();
-        });
-
-        function updateDarkModeIcon() {
-            const isDarkMode = body.classList.contains('dark-mode');
-            darkModeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>': '<i class="fas fa-moon"></i>';
-        }
-
-        // Navigation and content visibility
-        const nav = document.querySelector('nav');
-        const pageContent = document.querySelector('main');
-        const footer = document.querySelector('footer');
-        const menuToggle = document.querySelector('.menu-toggle');
-        const mobileNav = document.querySelector('.mobile-nav');
-        const mobileNavClose = document.querySelector('.mobile-nav-close');
-        const searchToggle = document.querySelector('.search-toggle');
-        const searchOverlay = document.querySelector('.search-overlay');
-        const searchClose = document.querySelector('.search-close');
-        const searchInput = document.getElementById('search');
-        const searchResults = document.querySelector('.search-results');
-        const searchMessage = document.getElementById('search-message');
-        const loadMoreButton = document.querySelector('.load-more');
-        const sections = document.querySelectorAll('section');
-
-        function hideContent() {
-            nav.classList.add('slide-out');
-            pageContent.classList.add('fade-out');
-            footer.classList.add('fade-out');
-            setTimeout(() => {
-                nav.style.display = 'none';
-                pageContent.style.display = 'noe';
-                footer.style.display = 'noe';
-            }, );
-        }
-
-        function showContent() {
-            nav.style.display = '';
-            pageContent.style.display = '';
-            footer.style.display = '';
-            setTimeout(() => {
-                nav.classList.remove('slide-out');
-                pageContent.classList.remove('fade-out');
-                footer.classList.remove('fade-out');
-            }, 50);
-        }
-
-        menuToggle.addEventListener('click', () => {
-            hideContent();
-            setTimeout(() => {
-                mobileNav.classList.add('active');
-            }, 300);
-        });
-
-        mobileNavClose.addEventListener('click', () => {
-            mobileNav.classList.remove('active');
-            setTimeout(showContent, 300);
-        });
-
-        searchToggle.addEventListener('click', () => {
-            hideContent();
-            setTimeout(() => {
-                searchOverlay.classList.add('active');
-                searchInput.focus();
-            }, 300);
-        });
-
-        searchClose.addEventListener('click', () => {
-            searchOverlay.classList.remove('active');
-            setTimeout(() => {
-                showContent();
-                searchInput.value = '';
-                searchResults.innerHTML = '';
-                searchMessage.textContent = '';
-                loadMoreButton.style.display = 'none';
-            }, 300);
-        });
-
-        // Search functionality
-        let allResults = [];
-        let currentPage = 1;
-        const resultsPerPage = 10;
-
-        searchInput.addEventListener('input', () => {
-            clearTimeout(searchInput.searchTimeout);
-            searchToggle.classList.add('searching');
-            searchInput.searchTimeout = setTimeout(() => {
-                performSearch();
-                searchToggle.classList.remove('searching');
-            }, 500);
-        });
-
-        function performSearch() {
-            const searchTerm = searchInput.value.toLowerCase();
-            searchResults.innerHTML = '';
-            searchMessage.textContent = 'Searching...';
-            loadMoreButton.style.display = 'none';
-
-            if (searchTerm.trim() === '') {
-                searchMessage.textContent = '';
-                return;
+            size: {
+                value: 3,
+                random: true,
+                anim: {
+                    enable: true,
+                    speed: 2,
+                    size_min: 0.1,
+                    sync: false
+                }
+            },
+            line_linked: {
+                enable: false
+            },
+            move: {
+                enable: true,
+                speed: 0.5,
+                direction: "none",
+                random: true,
+                straight: false,
+                out_mode: "out",
+                bounce: false
             }
-
-            setTimeout(() => {
-                allResults = [];
-                sections.forEach(section => {
-                    const text = section.textContent.toLowerCase();
-                    if (text.includes(searchTerm)) {
-                        const title = section.querySelector('h1, h2').textContent;
-                        const snippet = text.substring(text.indexOf(searchTerm) - 50, text.indexOf(searchTerm) + 50);
-                        allResults.push({
-                            title: title,
-                            snippet: snippet,
-                            id: section.id
-                        });
-                    }
-                });
-
-                if (allResults.length === 0) {
-                    searchMessage.textContent = 'No results found.';
-                } else {
-                    searchMessage.textContent = `${allResults.length} results found.`;
-                    currentPage = 1;
-                    displayResults();
-                }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: {
+                    enable: true,
+                    mode: "bubble"
+                },
+                onclick: {
+                    enable: true,
+                    mode: "push"
+                },
+                resize: true
             },
-                3000);
+            modes: {
+                bubble: {
+                    distance: 200,
+                    size: 6,
+                    duration: 2,
+                    opacity: 0.8,
+                    speed: 3
+                },
+                push: {
+                    particles_nb: 4
+                }
+            }
+        },
+        retina_detect: true
+    };
+
+    particlesJS('particles-js', particlesConfig);
+
+    // Dark mode toggle
+    const darkModeToggle = document.querySelector('.dark-mode-toggle');
+    const body = document.body;
+
+    body.classList.add('dark-mode');
+    updateDarkModeIcon();
+
+    darkModeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        updateDarkModeIcon();
+    });
+
+    function updateDarkModeIcon() {
+        const isDarkMode = body.classList.contains('dark-mode');
+        darkModeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>': '<i class="fas fa-moon"></i>';
+    }
+
+    // Navigation and content visibility
+    const nav = document.querySelector('nav');
+    const pageContent = document.querySelector('main');
+    const footer = document.querySelector('footer');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    const mobileNavClose = document.querySelector('.mobile-nav-close');
+    const searchToggle = document.querySelector('.search-toggle');
+    const searchOverlay = document.querySelector('.search-overlay');
+    const searchClose = document.querySelector('.search-close');
+    const searchInput = document.getElementById('search');
+    const searchResults = document.querySelector('.search-results');
+    const searchMessage = document.getElementById('search-message');
+    const loadMoreButton = document.querySelector('.load-more');
+    const sections = document.querySelectorAll('section');
+
+    function hideContent() {
+        nav.classList.add('hidden');
+        pageContent.classList.add('content-hidden');
+        footer.classList.add('content-hidden');
+    }
+
+    function showContent() {
+        nav.classList.remove('hidden');
+        pageContent.classList.remove('content-hidden');
+        footer.classList.remove('content-hidden');
+    }
+
+    menuToggle.addEventListener('click', () => {
+        mobileNav.classList.add('active');
+        hideContent();
+    });
+
+    mobileNavClose.addEventListener('click', () => {
+        mobileNav.classList.remove('active');
+        showContent();
+    });
+
+    searchToggle.addEventListener('click', () => {
+        searchOverlay.classList.add('active');
+        hideContent();
+        searchInput.focus();
+    });
+
+    searchClose.addEventListener('click', () => {
+        searchOverlay.classList.remove('active');
+        showContent();
+        searchInput.value = '';
+        searchResults.innerHTML = '';
+        searchMessage.textContent = '';
+        loadMoreButton.style.display = 'none';
+    });
+
+    // Search functionality
+    let allResults = [];
+    let currentPage = 1;
+    const resultsPerPage = 10;
+
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            performSearch();
+        }
+    });
+
+    searchToggle.addEventListener('click', performSearch);
+
+    function performSearch() {
+        const searchTerm = searchInput.value.toLowerCase();
+        searchResults.innerHTML = '';
+        searchMessage.textContent = 'Searching...';
+        loadMoreButton.style.display = 'none';
+
+        if (searchTerm.trim() === '') {
+            searchMessage.textContent = '';
+            return;
         }
 
-        function displayResults() {
-            const startIndex = (currentPage - 1) * resultsPerPage;
-            const endIndex = startIndex + resultsPerPage;
-            const pageResults = allResults.slice(startIndex,
-                endIndex);
+        const searchAnimation = document.querySelector('.search-animation');
+        searchAnimation.classList.add('active');
+        searchAnimation.play();
 
-            pageResults.forEach((result, index) => {
-                const resultElement = document.createElement('div');
-                resultElement.className = 'search-result';
-                resultElement.innerHTML = `
-                <h3>${result.title}</h3>
-                <p>${highlightText(result.snippet, searchInput.value)}</p>
-                <a href="#${result.id}" class="learn-more">Learn More</a>
-                `;
-                searchResults.appendChild(resultElement);
-                setTimeout(() => resultElement.classList.add('visible'), 50 * index);
-            });
-
-            loadMoreButton.style.display = endIndex < allResults.length ? 'block': 'none';
-        }
-
-        loadMoreButton.addEventListener('click', () => {
-            currentPage++;
-            loadMoreButton.style.display = 'none';
-            const loader = document.createElement('div');
-            loader.className = 'loader';
-            searchResults.appendChild(loader);
-            setTimeout(() => {
-                searchResults.removeChild(loader);
-                displayResults();
-            }, 1000);
-        });
-
-        function highlightText(text, term) {
-            const regex = new RegExp(`(${term})`,
-                'gi');
-            return text.replace(regex,
-                '<mark>$1</mark>');
-        }
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    searchOverlay.classList.remove('active');
-                    mobileNav.classList.remove('active');
-                    showContent();
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
+        setTimeout(() => {
+            allResults = [];
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    const title = section.querySelector('h1, h2').textContent;
+                    const snippet = text.substring(text.indexOf(searchTerm) - 50, text.indexOf(searchTerm) + 50);
+                    allResults.push({
+                        title: title,
+                        snippet: snippet,
+                        id: section.id
                     });
                 }
             });
+
+            if (allResults.length === 0) {
+                searchMessage.textContent = 'No results found.';
+            } else {
+                searchMessage.textContent = `${allResults.length} results found.`;
+                currentPage = 1;
+                displayResults();
+            }
+
+            searchAnimation.classList.remove('active');
+            searchAnimation.pause();
+            searchAnimation.currentTime = 0;
+        },
+            4000);
+    }
+
+    function displayResults() {
+        const startIndex = (currentPage - 1) * resultsPerPage;
+        const endIndex = startIndex + resultsPerPage;
+        const pageResults = allResults.slice(startIndex,
+            endIndex);
+
+        pageResults.forEach((result, index) => {
+            const resultElement = document.createElement('div');
+            resultElement.className = 'search-result';
+            resultElement.innerHTML = `
+            <h3>${result.title}</h3>
+            <p>${highlightText(result.snippet, searchInput.value)}</p>
+            <a href="#${result.id}" class="learn-more">Learn More</a>
+            `;
+            searchResults.appendChild(resultElement);
+            setTimeout(() => resultElement.classList.add('visible'), 50 * index);
         });
 
-        // Intersection Observer for fade-in effect
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1
+        loadMoreButton.style.display = endIndex < allResults.length ? 'block': 'none';
+    }
+
+    loadMoreButton.addEventListener('click', () => {
+        currentPage++;
+        loadMoreButton.style.display = 'none';
+        const loader = document.createElement('div');
+        loader.className = 'loader';
+        searchResults.appendChild(loader);
+        setTimeout(() => {
+            searchResults.removeChild(loader);
+            displayResults();
+        }, 1000);
+    });
+
+    function highlightText(text, term) {
+        const regex = new RegExp(`(${term})`,
+            'gi');
+        return text.replace(regex,
+            '<mark>$1</mark>');
+    }
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                searchOverlay.classList.remove('active');
+                mobileNav.classList.remove('active');
+                showContent();
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         });
+    });
 
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
+    // Intersection Observer for fade-in effect
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
         });
+    }, {
+        threshold: 0.1
+    });
 
+    document.querySelectorAll('section').forEach(section => {
+        observer.observe(section);
+    });
 
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+    // Contact form submission
+    const form = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
 
-            var form = event.target;
-            var formData = new FormData(form);
-            var submitButton = form.querySelector('button[type="submit"]');
-            var successMessage = document.getElementById('successMessage');
-            var errorMessage = document.getElementById('errorMessage');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
 
-            submitButton.disabled = true;
-            submitButton.textContent = 'Sending...';
-
-            fetch(form.action,
+        try {
+            const response = await fetch(form.action,
                 {
                     method: 'POST',
                     body: formData,
                     headers: {
                         'Accept': 'application/json'
                     }
-                }).then(response => {
-                    if (response.ok) {
-                        form.reset();
-                        successMessage.classList.add('show-message');
-                        errorMessage.classList.remove('show-message');
-                    } else {
-                        throw new Error('Form submission failed');
-                    }
-                }).catch(error => {
-                    errorMessage.classList.add('show-message');
-                    successMessage.classList.remove('show-message');
-                }).finally(() => {
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'Send Message';
                 });
-        });
-    </script>
+
+            if (response.ok) {
+                form.reset();
+                successMessage.classList.add('show-message');
+                setTimeout(() => {
+                    successMessage.classList.remove('show-message');
+                }, 5000);
+            } else {
+                throw new Error('Form submission failed');
+            }
+        } catch (error) {
+            errorMessage.classList.add('show-message');
+            setTimeout(() => {
+                errorMessage.classList.remove('show-message');
+            }, 5000);
+        }
+    });
+</script>
 </body>
 </html>
