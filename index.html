@@ -946,6 +946,9 @@
             </div>
         </div>
     </div>
+        <div style="text-align: center; "class="copyright">
+            &copy; 2024 W3Dhamma. All rights reserved.
+        </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
@@ -1205,37 +1208,28 @@
             '<mark>$1</mark>');
     }
 
-    // Smooth scroll for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                searchOverlay.classList.remove('active');
-                mobileNav.classList.remove('active');
-                showContent();
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
+// Smooth animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.card, .footer-section, .form-container');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
                 });
-            }
-        });
-    });
+            }, {
+                threshold: 0.1
+            });
 
-    // Intersection Observer for fade-in effect
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                observer.observe(el);
+            });
         });
-    }, {
-        threshold: 0.1
-    });
-
-    document.querySelectorAll('section').forEach(section => {
-        observer.observe(section);
-    });
 
     // Contact form submission
     const form = document.getElementById('contactForm');
