@@ -675,6 +675,15 @@
     }
     </style>
 </head>
+    <?php
+// Logic to handle user permissions and restrictions
+if ($user_allowed) {
+    echo '<html>...</html>'; // Render HTML dynamically
+} else {
+    echo "Access Denied";
+}
+?>
+
 <body>
     <div id="particles-js"></div>
     <nav>
